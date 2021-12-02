@@ -40,9 +40,8 @@ func main() {
 			os.Exit(1)
 		}
 
-		// Trim the first value in the array, and then add the new value to the end
-		values = values[1:]
-		values = append(values, lineInt)
+		// Put values in the array
+		values[i+1] = lineInt
 	}
 
 	// This is how we'll keep track of the current sum vs the previous one
@@ -59,12 +58,13 @@ func main() {
 			os.Exit(1)
 		}
 
-		// Trim the first value in the array, and then add the new value to the end
-		values = values[1:]
-		values = append(values, lineInt)
+		// Shift the values down
+		values[0] = values[1]
+		values[1] = values[2]
+		values[2] = lineInt
 
 		// pass the object references to the function so we can compute without more alloc's
-		sum = checkValues(&values)
+		sum = checkValues(values)
 
 		if sum > lastSum {
 			increases++
@@ -78,9 +78,9 @@ func main() {
 }
 
 // checkValues returns the sum of values in an int array
-func checkValues(values *[]int) int {
+func checkValues(values []int) int {
 	sum := 0
-	for _, value := range *values {
+	for _, value := range values {
 		sum += value
 	}
 
