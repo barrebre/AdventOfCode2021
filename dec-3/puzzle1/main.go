@@ -10,21 +10,6 @@ import (
 	"github.com/spf13/cast"
 )
 
-type Position struct {
-	Aim   int
-	Depth int
-}
-
-// Use an enum to track the directions more easily
-type Direction int
-
-const (
-	Undefined Direction = iota
-	Forward
-	Up
-	Down
-)
-
 func main() {
 	// Open the file of inputs, which I named input.txt
 	filename := "input.txt"
